@@ -7,7 +7,7 @@ Ta projekt je enostavna statusna stran (nadzorna plošča) za spremljanje delova
 - HTML za osnovno strukturo strani
 - CSS za temen dizajn (dark mode)
 - JavaScript za delovanje mrežnega testa (gumb)
-- GitHub za shranjevanje kode in verzioniranje
+- GitHub za shranjevanje kode in verzij
 - Vercel za avtomatsko objavo spletne strani na internetu
 - Supabase za nastavitve zunanje baze podatkov
 
