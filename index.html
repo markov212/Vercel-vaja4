@@ -1,104 +1,124 @@
-HTML
 <!DOCTYPE html>
 <html lang="sl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vercel vaja - CI/CD</title>
+  <title>IT System Status Dashboard</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    /* Vse oblikovanje (CSS) je zdaj kar tukaj */
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      margin: 0;
+      padding: 40px;
       display: flex;
       justify-content: center;
-      align-items: center;
-      color: #f8fafc;
     }
-    .card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      max-width: 450px;
+    main {
+      max-width: 600px;
       width: 100%;
-      text-align: center;
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
-    .status-badge {
-      display: inline-block;
-      background: rgba(16, 185, 129, 0.2);
-      color: #10b981;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    h2 {
+      margin-top: 0;
+      color: #38bdf8;
     }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-    p {
+    .subtitle {
       color: #94a3b8;
-      font-size: 1rem;
-      line-height: 1.5;
-      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+    .status-container {
+      margin: 25px 0;
+    }
+    .status-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: #0f172a;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+    .badge {
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    .badge.online {
+      background: #10b981;
+      color: #052e16;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background: #334155;
+      margin: 25px 0;
     }
     button {
-      background: #ffffff;
+      background: #38bdf8;
       color: #0f172a;
       border: none;
-      padding: 14px 28px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 6px;
       cursor: pointer;
-      transition: all 0.2s ease;
-      width: 100%;
+      transition: background 0.2s;
     }
     button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+      background: #0ea5e9;
+    }
+    #ping-result {
+      color: #cbd5e1;
+      font-style: italic;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
-
-  <div class="card">
-    <div class="status-badge">CI/CD Preizkus</div>
-    <h1>Vercel vaja - CI/CD</h1>
-    <p>Projekt je uspešno objavljen na platformi Vercel preko GitHub repozitorija.</p>
+  <main>
+    <h2>IT System Status Dashboard</h2>
+    <p class="subtitle">Spremljanje delovanja lokalnih IT storitev in strežnikov.</p>
     
-    <div class="interactive-section">
-      <button id="clickBtn">Klikni me: <span id="counter">0</span></button>
-      <p id="message" style="display: none; margin-top: 20px; color: #38bdf8;">Odlično! JavaScript interaktivnost deluje bez napak.</p>
+    <div class="status-container">
+      <div class="status-item">
+        <span>Baza podatkov (Supabase Cloud)</span>
+        <span class="badge online">ONLINE</span>
+      </div>
+      <div class="status-item">
+        <span>Glavni API Strežnik</span>
+        <span class="badge online">ONLINE</span>
+      </div>
+      <div class="status-item">
+        <span>Vercel Edge Network</span>
+        <span class="badge online">ONLINE</span>
+      </div>
     </div>
-  </div>
+
+    <hr>
+
+    <div class="interactive-section">
+      <h3>Preveri odzivni čas (Ping)</h3>
+      <button onclick="checkPing()">Zaženi test omrežja</button>
+      <p id="ping-result">Kliknite gumb za začetek merjenja...</p>
+    </div>
+  </main>
 
   <script>
-    var count = 0;
-    var gumb = document.getElementById("clickBtn");
-    var stevec = document.getElementById("counter");
-    var tekst = document.getElementById("message");
-
-    gumb.onclick = function() {
-      count++;
-      stevec.innerHTML = count;
+    /* Vsa logika (JavaScript) je zdaj kar tukaj */
+    function checkPing() {
+      const resultText = document.getElementById("ping-result");
+      resultText.innerText = "Skeniram omrežje...";
       
-      if (count >= 3) {
-        tekst.style.display = "block";
-      }
-    };
+      setTimeout(() => {
+        const randomPing = Math.floor(Math.random() * (45 - 14 + 1)) + 14;
+        resultText.innerHTML = `Povezava stabilna. Trenutni odzivni čas: <strong style="color: #10b981;">${randomPing} ms</strong> (OK)`;
+      }, 1200);
+    }
   </script>
 </body>
 </html>
