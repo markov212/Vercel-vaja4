@@ -1,0 +1,104 @@
+HTML
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vercel Deploy Vaja — MV</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #f8fafc;
+    }
+    .card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+    }
+    .status-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    p {
+      color: #94a3b8;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    button {
+      background: #ffffff;
+      color: #0f172a;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="status-badge">Produkcija živo</div>
+    <h1>Vercel Deploy Vaja</h1>
+    <p>Projekt je uspešno objavljen na platformi Vercel preko GitHub repozitorija.</p>
+    
+    <div class="interactive-section">
+      <button id="clickBtn">Klikni me: <span id="counter">0</span></button>
+      <p id="message" style="display: none; margin-top: 20px; color: #38bdf8;">Odlično! JavaScript interaktivnost deluje bez napak.</p>
+    </div>
+  </div>
+
+  <script>
+    var count = 0;
+    var gumb = document.getElementById("clickBtn");
+    var stevec = document.getElementById("counter");
+    var tekst = document.getElementById("message");
+
+    gumb.onclick = function() {
+      count++;
+      stevec.innerHTML = count;
+      
+      if (count >= 3) {
+        tekst.style.display = "block";
+      }
+    };
+  </script>
+</body>
+</html>
